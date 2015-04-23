@@ -1,9 +1,9 @@
 <?php
 namespace Module\CSS;
 
-require_once(dirname(__FILE__) . '/../../../include/class.debug.php');
-require_once(dirname(__FILE__) . '/../../../include/class.sm.php');
-require_once(dirname(__FILE__) . '/../../../include/global.php');
+require_once(dirname(__FILE__) . '/../../core/class.debug.php');
+require_once(dirname(__FILE__) . '/../../core/class.sm.php');
+require_once(dirname(__FILE__) . '/../../core/global.php');
 
 /**
  * This is where the <link> tag points to. It should be in the format of:
