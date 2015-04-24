@@ -14,12 +14,15 @@ function render() {
 	$args = \Sleepy\Hook::addFilter("csscompress_files", array($args));
 
 	if (\Sleepy\SM::isLive()) {
-		$c = new Compress();
-
 		$files = "";
 
 		foreach ($args as $file) {
 			if (empty($file)) {
+				continue;
+			}
+
+			if (stripos($file, 'http') === 0) {
+				$buffer .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$file}\">\n\t";
 				continue;
 			}
 
@@ -31,13 +34,18 @@ function render() {
 		}
 
 		$files = urlencode($files);
-		return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . URLBASE . "app/modules/enabled/css-compress/?c={$files}\">";
+		$buffer .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . URLBASE . "app/modules/css-compress/?c={$files}\">\n\t";
+		return $buffer;
 	} else {
 		foreach ($args as $file) {
 			if (empty($file)) {
 				continue;
 			}
-			$buffer .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . URLBASE . "css/{$file}.css\">\n\t";
+			if (stripos($file, 'http') === 0) {
+				$buffer .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$file}\">\n\t";
+			} else {
+				$buffer .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . URLBASE . "css/{$file}.css\">\n\t";
+			}
 		}
 
 		return $buffer;
