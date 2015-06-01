@@ -3,7 +3,9 @@ namespace Module\CSS;
 
 require_once(dirname(__FILE__) . '/../../core/class.debug.php');
 require_once(dirname(__FILE__) . '/../../core/class.sm.php');
-require_once(dirname(__FILE__) . '/../../core/global.php');
+if (@!include_once(dirname(__FILE__) . '/../../../settings.php')) {
+	include_once(dirname(__FILE__) . '/../../core/settings.php');
+}
 
 /**
  * This is where the <link> tag points to. It should be in the format of:
